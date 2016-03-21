@@ -19,8 +19,12 @@ namespace uuidxx
 
 		uuid() = default;
 
-		uuid (const char *guidString);
-		std::string ToString(bool withBraces = true) const;
+		uuid (const char *uuidString);
+		uuid (const std::string &uuidString);
+		static uuid FromString(const char *uuidString);
+		static uuid FromString(const std::string &uuidString);
 		static uuid Generate();
+
+		std::string ToString(bool withBraces = true) const;
 	};
 }
