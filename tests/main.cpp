@@ -22,7 +22,7 @@ bool TestEquality()
 	uuid test1, test2;
 
 	auto passTest = [&](bool reverse = false) {
-		if ((test1.ToString() != test2.ToString()) ^ reverse)
+		if ((test1 != test2) ^ reverse)
 		{
 			cout << "FAIL!" << endl;
 			cout << "\tFailed on: " << test1.ToString() << " vs " << test2.ToString() << endl;
@@ -33,6 +33,16 @@ bool TestEquality()
 			cout << "pass" << endl;
 		}
 	};
+
+	cout << "Testing assignment... ";
+	test1 = uuid::Generate();
+	test2 = test1;
+	passTest();
+
+	cout << "Testing move operator... ";
+	test1 = uuid::Generate();
+	test2 = std::move(test1);
+	passTest(false);
 
 	cout << "Testing equality of normal GUIDs... ";
 	test1 = uuid("2C121B80-14B1-4B5A-AD48-9043DC251FDF");
@@ -53,7 +63,7 @@ bool TestEquality()
 	cout << "Testing inequality of random GUIDs... ";
 	test1 = uuid::Generate();
 	test2 = uuid::Generate();
-	passTest(true);	
+	passTest(true);
 
 	return result;
 }
