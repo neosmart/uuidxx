@@ -1,6 +1,8 @@
 #include "uuidxx.h"
-#include <regex>
 #include <random>
+#include <stdio.h>
+#include <inttypes.h>
+//#include <regex>
 
 using namespace std;
 using namespace uuidxx;
@@ -32,9 +34,25 @@ uuid::uuid (const std::string &uuidString)
 
 uuid::uuid (const char *uuidString)
 {
+	if (uuidString == nullptr)
+	{
+		return;
+	}
+
 	//MSVC is broken, doesn't support hh and insists on two bytes per field
 	//sscanf(uuidString, "{%08lX-%04hX-%04hX-%02hhX%02hhX-%02hhX%02hhX%02hhX%02hhX%02hhX%02hhX}", &Data1, &Data2, &Data3, &Data4[0], &Data4[1], &Data4[2], &Data4[3], &Data4[4], &Data4[5], &Data4[6], &Data4[7]);
-	static auto guidRegex = regex("\\{?([0-9a-fA-F]{8})-([0-9a-fA-F]{4})-([0-9a-fA-F]{4})-([0-9a-fA-F]{2})([0-9a-fA-F]{2})-([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})\\}?");
+
+	if (uuidString[0] == '{')
+	{
+		sscanf(uuidString, "{%08" SCNx32 "-%04" SCNx16 "-%04" SCNx16 "-%02" SCNx8 "%02" SCNx8 "-%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "}", &Data1, &Data2, &Data3, &Data4[0], &Data4[1], &Data4[2], &Data4[3], &Data4[4], &Data4[5], &Data4[6], &Data4[7]);
+	}
+	else
+	{
+		sscanf(uuidString, "%08" SCNx32 "-%04" SCNx16 "-%04" SCNx16 "-%02" SCNx8 "%02" SCNx8 "-%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "", &Data1, &Data2, &Data3, &Data4[0], &Data4[1], &Data4[2], &Data4[3], &Data4[4], &Data4[5], &Data4[6], &Data4[7]);
+	}
+
+	/*static auto guidRegex = regex("\\{?([0-9a-fA-F]{8})-([0-9a-fA-F]{4})-([0-9a-fA-F]{4})-([0-9a-fA-F]{2})([0-9a-fA-F]{2})-([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})\\}?");
+
 	cmatch matchResults;
 	if (regex_match(uuidString, matchResults, guidRegex))
 	{
@@ -45,7 +63,7 @@ uuid::uuid (const char *uuidString)
 		{
 			Data4[i] = static_cast<uint8_t>(stoul(matchResults[4 + i], nullptr, 16));
 		}
-	}
+	}*/
 }
 
 string uuid::ToString(bool withBraces) const
