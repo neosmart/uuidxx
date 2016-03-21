@@ -54,20 +54,12 @@ uuid uuid::Generate()
 {
 	std::random_device rd;
 	std::mt19937_64 gen(rd());
-
-	std::uniform_int_distribution<uint32_t> dis32;
-	std::uniform_int_distribution<uint16_t> dis16;
-	//not supported on Windows. See https://connect.microsoft.com/VisualStudio/feedback/details/2420840
-	//std::uniform_int_distribution<uint8_t> dis8;
+	std::uniform_int_distribution<uint64_t> dis64;
 
 	uuid newGuid;
-	newGuid.Data1 = dis32(gen);
-	newGuid.Data2 = dis16(gen);
-	newGuid.Data3 = dis16(gen);
-	for (auto &data4 : newGuid.Data4)
-	{
-		data4 = static_cast<uint8_t>(dis16(gen));
-	}
+	uint64_t *local = new (&newGuid) (uint64_t[2]);
+	local[0] = dis64(gen);
+	local[1] = dis64(gen);
 
 	return newGuid;
 }
