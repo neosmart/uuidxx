@@ -78,8 +78,13 @@ uuid uuid::FromString(const std::string &uuidString)
 
 uuid uuid::Generate()
 {
+#if !defined(__APPLE__) //mach-o does not support TLS
 	thread_local std::random_device rd;
 	thread_local auto gen = std::mt19937_64(rd());
+#else
+	std::random_device rd;
+	std::mt19937_64 gen(rd());
+#endif
 	std::uniform_int_distribution<uint64_t> dis64;
 
 	uuid newGuid;
