@@ -134,7 +134,7 @@ bool TestStringGeneration()
 		result = false;
 	}
 
-	return true;	
+	return result;
 }
 
 bool TestUniqueness()
