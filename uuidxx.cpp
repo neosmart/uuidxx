@@ -74,8 +74,8 @@ uuid uuid::FromString(const std::string &uuidString)
 
 uuid uuid::Generate()
 {
-	std::random_device rd;
-	std::mt19937_64 gen(rd());
+	thread_local std::random_device rd;
+	thread_local auto gen = std::mt19937_64(rd());
 	std::uniform_int_distribution<uint64_t> dis64;
 
 	uuid newGuid;
