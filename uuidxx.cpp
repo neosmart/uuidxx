@@ -79,9 +79,8 @@ uuid uuid::Generate()
 	std::uniform_int_distribution<uint64_t> dis64;
 
 	uuid newGuid;
-	uint64_t *local = new (&newGuid) (uint64_t[2]);
-	local[0] = dis64(gen);
-	local[1] = dis64(gen);
+	newGuid.WideIntegers[0] = dis64(gen);
+	newGuid.WideIntegers[1] = dis64(gen);
 
 	return newGuid;
 }
