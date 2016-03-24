@@ -5,6 +5,10 @@
 #include <array>
 #include <string.h>
 
+#ifdef _WIN32
+#define strcasecmp _stricmp
+#endif
+
 using namespace uuidxx;
 using namespace std;
 
