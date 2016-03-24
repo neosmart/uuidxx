@@ -7,7 +7,6 @@ using namespace std;
 using namespace uuidxx;
 
 #ifdef _WIN32
-#define sprintf sprintf_s
 #define sscanf sscanf_s
 #endif
 
@@ -55,9 +54,14 @@ uuid::uuid (const char *uuidString)
 
 string uuid::ToString(bool withBraces) const
 {
-	char buffer[39];
-	sprintf(buffer, "%s%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X%s", withBraces ? "{" : "", Data1, Data2, Data3, Data4[0], Data4[1], Data4[2], Data4[3], Data4[4], Data4[5], Data4[6], Data4[7], withBraces ? "}" : "");
-	return string(buffer);
+	string buffer;
+	buffer.reserve(38);
+#ifndef _WIN32
+	sprintf(const_cast<char *>(buffer.data()), "%s%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X%s", withBraces ? "{" : "", Data1, Data2, Data3, Data4[0], Data4[1], Data4[2], Data4[3], Data4[4], Data4[5], Data4[6], Data4[7], withBraces ? "}" : "");
+#else
+	sprintf_s(const_cast<char *>(buffer.data()), 38+1, "%s%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X%s", withBraces ? "{" : "", Data1, Data2, Data3, Data4[0], Data4[1], Data4[2], Data4[3], Data4[4], Data4[5], Data4[6], Data4[7], withBraces ? "}" : "");
+#endif
+	return buffer;
 }
 
 uuid uuid::FromString(const char *uuidString)
