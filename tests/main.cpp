@@ -110,7 +110,10 @@ bool TestStringGeneration()
 	uuid test("BAA55AAB-F3FC-461C-9789-8CC6E2E2CE8C");
 
 	cout << "Testing generation of string without braces... ";
-	if (test.ToString(false) == "BAA55AAB-F3FC-461C-9789-8CC6E2E2CE8C")
+	//don't use
+	//if (test.ToString(false) == "....")
+	//because the temporary result may be optimized away
+	if (strcmp(test.ToString(false).c_str(), "BAA55AAB-F3FC-461C-9789-8CC6E2E2CE8C") == 0)
 	{
 		cout << "pass" << endl;
 	}
@@ -121,7 +124,7 @@ bool TestStringGeneration()
 	}
 
 	cout << "Testing generation of string without braces... ";
-	if (test.ToString(true) == "{BAA55AAB-F3FC-461C-9789-8CC6E2E2CE8C}")
+	if (strcmp(test.ToString(true).c_str(), "{BAA55AAB-F3FC-461C-9789-8CC6E2E2CE8C}") == 0)
 	{
 		cout << "pass" << endl;
 	}
