@@ -31,4 +31,6 @@ namespace uuidxx
 
 		std::string ToString(bool withBraces = true) const;
 	};
+
+	static_assert(sizeof(uuid) == 2 * sizeof(int64_t), "Check uuid type declaration/padding!");
 }
