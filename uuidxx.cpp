@@ -54,12 +54,11 @@ uuid::uuid (const char *uuidString)
 
 string uuid::ToString(bool withBraces) const
 {
-	string buffer;
-	buffer.reserve(38);
+	char buffer[39];
 #ifndef _WIN32
-	sprintf(const_cast<char *>(buffer.data()), "%s%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X%s", withBraces ? "{" : "", Uuid.Data1, Uuid.Data2, Uuid.Data3, Uuid.Data4[0], Uuid.Data4[1], Uuid.Data4[2], Uuid.Data4[3], Uuid.Data4[4], Uuid.Data4[5], Uuid.Data4[6], Uuid.Data4[7], withBraces ? "}" : "");
+	sprintf(buffer, "%s%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X%s", withBraces ? "{" : "", Uuid.Data1, Uuid.Data2, Uuid.Data3, Uuid.Data4[0], Uuid.Data4[1], Uuid.Data4[2], Uuid.Data4[3], Uuid.Data4[4], Uuid.Data4[5], Uuid.Data4[6], Uuid.Data4[7], withBraces ? "}" : "");
 #else
-	sprintf_s(const_cast<char *>(buffer.data()), 38+1, "%s%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X%s", withBraces ? "{" : "", Uuid.Data1, Uuid.Data2, Uuid.Data3, Uuid.Data4[0], Uuid.Data4[1], Uuid.Data4[2], Uuid.Data4[3], Uuid.Data4[4], Uuid.Data4[5], Uuid.Data4[6], Uuid.Data4[7], withBraces ? "}" : "");
+	sprintf_s(buffer, 38+1, "%s%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X%s", withBraces ? "{" : "", Uuid.Data1, Uuid.Data2, Uuid.Data3, Uuid.Data4[0], Uuid.Data4[1], Uuid.Data4[2], Uuid.Data4[3], Uuid.Data4[4], Uuid.Data4[5], Uuid.Data4[6], Uuid.Data4[7], withBraces ? "}" : "");
 #endif
 	return buffer;
 }
