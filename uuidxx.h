@@ -14,7 +14,7 @@ namespace uuidxx
 			uint16_t  Data2;
 			uint16_t Data3;
 			uint8_t Data4[8];
-		};
+		} Uuid;
 
 		bool operator == (const uuid &guid2) const;
 		bool operator != (const uuid &guid2) const;

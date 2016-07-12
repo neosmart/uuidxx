@@ -44,11 +44,11 @@ uuid::uuid (const char *uuidString)
 
 	if (uuidString[0] == '{')
 	{
-		sscanf(uuidString, "{%08" SCNx32 "-%04" SCNx16 "-%04" SCNx16 "-%02" SCNx8 "%02" SCNx8 "-%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "}", &Data1, &Data2, &Data3, &Data4[0], &Data4[1], &Data4[2], &Data4[3], &Data4[4], &Data4[5], &Data4[6], &Data4[7]);
+		sscanf(uuidString, "{%08" SCNx32 "-%04" SCNx16 "-%04" SCNx16 "-%02" SCNx8 "%02" SCNx8 "-%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "}", &Uuid.Data1, &Uuid.Data2, &Uuid.Data3, &Uuid.Data4[0], &Uuid.Data4[1], &Uuid.Data4[2], &Uuid.Data4[3], &Uuid.Data4[4], &Uuid.Data4[5], &Uuid.Data4[6], &Uuid.Data4[7]);
 	}
 	else
 	{
-		sscanf(uuidString, "%08" SCNx32 "-%04" SCNx16 "-%04" SCNx16 "-%02" SCNx8 "%02" SCNx8 "-%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "", &Data1, &Data2, &Data3, &Data4[0], &Data4[1], &Data4[2], &Data4[3], &Data4[4], &Data4[5], &Data4[6], &Data4[7]);
+		sscanf(uuidString, "%08" SCNx32 "-%04" SCNx16 "-%04" SCNx16 "-%02" SCNx8 "%02" SCNx8 "-%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "%02" SCNx8 "", &Uuid.Data1, &Uuid.Data2, &Uuid.Data3, &Uuid.Data4[0], &Uuid.Data4[1], &Uuid.Data4[2], &Uuid.Data4[3], &Uuid.Data4[4], &Uuid.Data4[5], &Uuid.Data4[6], &Uuid.Data4[7]);
 	}
 }
 
@@ -57,9 +57,9 @@ string uuid::ToString(bool withBraces) const
 	string buffer;
 	buffer.reserve(38);
 #ifndef _WIN32
-	sprintf(const_cast<char *>(buffer.data()), "%s%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X%s", withBraces ? "{" : "", Data1, Data2, Data3, Data4[0], Data4[1], Data4[2], Data4[3], Data4[4], Data4[5], Data4[6], Data4[7], withBraces ? "}" : "");
+	sprintf(const_cast<char *>(buffer.data()), "%s%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X%s", withBraces ? "{" : "", Uuid.Data1, Uuid.Data2, Uuid.Data3, Uuid.Data4[0], Uuid.Data4[1], Uuid.Data4[2], Uuid.Data4[3], Uuid.Data4[4], Uuid.Data4[5], Uuid.Data4[6], Uuid.Data4[7], withBraces ? "}" : "");
 #else
-	sprintf_s(const_cast<char *>(buffer.data()), 38+1, "%s%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X%s", withBraces ? "{" : "", Data1, Data2, Data3, Data4[0], Data4[1], Data4[2], Data4[3], Data4[4], Data4[5], Data4[6], Data4[7], withBraces ? "}" : "");
+	sprintf_s(const_cast<char *>(buffer.data()), 38+1, "%s%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X%s", withBraces ? "{" : "", Uuid.Data1, Uuid.Data2, Uuid.Data3, Uuid.Data4[0], Uuid.Data4[1], Uuid.Data4[2], Uuid.Data4[3], Uuid.Data4[4], Uuid.Data4[5], Uuid.Data4[6], Uuid.Data4[7], withBraces ? "}" : "");
 #endif
 	return buffer;
 }
