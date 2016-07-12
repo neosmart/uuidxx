@@ -8,7 +8,7 @@ namespace uuidxx
 	union uuid
 	{
 		uint64_t WideIntegers[2];
-		struct
+		struct _internalData
 		{
 			uint32_t Data1;
 			uint16_t  Data2;
