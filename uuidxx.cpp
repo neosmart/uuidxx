@@ -2,6 +2,7 @@
 #include <random>
 #include <stdio.h>
 #include <inttypes.h>
+#include <string.h>
 
 using namespace std;
 using namespace uuidxx;
