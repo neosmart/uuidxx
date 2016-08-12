@@ -178,5 +178,7 @@ int main (int argc, char *argv[])
 		}
 	}
 
+	cout << "Generating UUIDv4: " << uuid::Generate().ToString() << endl;
+
 	return fails;
 }
