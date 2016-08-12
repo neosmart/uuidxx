@@ -1,4 +1,5 @@
 #include "../uuidxx.h"
+#include <cassert>
 #include <string>
 #include <iostream>
 #include <set>
@@ -178,5 +179,6 @@ int main (int argc, char *argv[])
 		}
 	}
 
+	assert(fails == 0);
 	return fails;
 }
