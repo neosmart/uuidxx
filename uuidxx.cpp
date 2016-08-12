@@ -40,6 +40,8 @@ uuid::uuid (const char *uuidString)
 {
 	if (uuidString == nullptr)
 	{
+		//special case, and prevents random bugs
+		memset(this, 0, sizeof(uuid));
 		return;
 	}
 

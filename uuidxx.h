@@ -7,7 +7,7 @@ namespace uuidxx
 {
 	enum class Variant
 	{
-		Reserved,
+		Nil,
 		Version1,
 		Version2,
 		Version3,
@@ -54,6 +54,11 @@ namespace uuidxx
 		static inline uuid Generate<Variant::Version4>()
 		{
 			return Generatev4();
+		}
+		template<>
+		static inline uuid Generate<Variant::Nil>()
+		{
+			return uuid(nullptr); //special case
 		}
 
 		std::string ToString(bool withBraces = true) const;
