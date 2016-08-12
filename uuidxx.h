@@ -15,10 +15,19 @@ namespace uuidxx
 		Version5
 	};
 
+	class NotImplemented : public std::logic_error
+	{
+	public:
+		NotImplemented() : std::logic_error("Function not yet implemented") { };
+	};
+
 	union uuid
 	{
 	private:
 		static uuid Generatev4();
+
+		template<Variant V>
+		friend uuid GenerateUuid();
 	public:
 		uint64_t WideIntegers[2];
 		struct _internalData
@@ -48,21 +57,28 @@ namespace uuidxx
 		static uuid FromString(const char *uuidString);
 		static uuid FromString(const std::string &uuidString);
 
-		template<Variant v = Variant::Version4>
-		static inline uuid Generate();
-		template<>
-		static inline uuid Generate<Variant::Version4>()
+		template<Variant V = Variant::Version4>
+		static inline uuid Generate()
 		{
-			return Generatev4();
-		}
-		template<>
-		static inline uuid Generate<Variant::Nil>()
-		{
-			return uuid(nullptr); //special case
+			return GenerateUuid<V>();
 		}
 
 		std::string ToString(bool withBraces = true) const;
 	};
+
+	template<Variant V = Variant::Version4>
+	inline uuid GenerateUuid();
+	template<>
+	static inline uuid GenerateUuid<Variant::Version4>()
+	{
+		return uuid::Generatev4();
+	}
+
+	template<>
+	inline uuid GenerateUuid<Variant::Nil>()
+	{
+		return uuid(nullptr); //handled via special case
+	}
 
 	static_assert(sizeof(uuid) == 2 * sizeof(int64_t), "Check uuid type declaration/padding!");
 }
