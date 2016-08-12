@@ -5,8 +5,21 @@
 
 namespace uuidxx
 {
+	enum class Variant
+	{
+		Reserved,
+		Version1,
+		Version2,
+		Version3,
+		Version4,
+		Version5
+	};
+
 	union uuid
 	{
+	private:
+		static uuid Generatev4();
+	public:
 		uint64_t WideIntegers[2];
 		struct _internalData
 		{
@@ -34,7 +47,14 @@ namespace uuidxx
 		uuid(const std::string &uuidString);
 		static uuid FromString(const char *uuidString);
 		static uuid FromString(const std::string &uuidString);
-		static uuid Generate();
+
+		template<Variant v = Variant::Version4>
+		static inline uuid Generate();
+		template<>
+		static inline uuid Generate<Variant::Version4>()
+		{
+			return Generatev4();
+		}
 
 		std::string ToString(bool withBraces = true) const;
 	};

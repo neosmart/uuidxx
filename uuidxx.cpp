@@ -76,9 +76,9 @@ uuid uuid::FromString(const std::string &uuidString)
 	return temp;
 }
 
-uuid uuid::Generate()
+uuid uuid::Generatev4()
 {
-//mach-o does not support TLS and clang still has issues with thread_local
+	//mach-o does not support TLS and clang still has issues with thread_local
 #if !defined(__APPLE__) && !defined(__clang__)
 	thread_local std::random_device rd;
 	thread_local auto gen = std::mt19937_64(rd());
