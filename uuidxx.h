@@ -26,8 +26,6 @@ namespace uuidxx
 	private:
 		static uuid Generatev4();
 
-		template<Variant V>
-		friend uuid GenerateUuid();
 	public:
 		uint64_t WideIntegers[2];
 		struct _internalData
@@ -57,28 +55,24 @@ namespace uuidxx
 		static uuid FromString(const char *uuidString);
 		static uuid FromString(const std::string &uuidString);
 
-		template<Variant V = Variant::Version4>
-		static inline uuid Generate()
+		static inline uuid Generate(Variant v = Variant::Version4)
 		{
-			return GenerateUuid<V>();
+			switch (v)
+			{
+			case Variant::Nil:
+				return uuid(nullptr); //special case;
+			case Variant::Version1:
+			case Variant::Version2:
+			case Variant::Version3:
+			case Variant::Version5:
+				throw new NotImplemented();
+			case Variant::Version4:
+				return Generatev4();
+			}
 		}
 
 		std::string ToString(bool withBraces = true) const;
 	};
-
-	template<Variant V = Variant::Version4>
-	inline uuid GenerateUuid();
-	template<>
-	static inline uuid GenerateUuid<Variant::Version4>()
-	{
-		return uuid::Generatev4();
-	}
-
-	template<>
-	inline uuid GenerateUuid<Variant::Nil>()
-	{
-		return uuid(nullptr); //handled via special case
-	}
 
 	static_assert(sizeof(uuid) == 2 * sizeof(int64_t), "Check uuid type declaration/padding!");
 }
