@@ -15,6 +15,13 @@ namespace uuidxx
 			uint16_t Data3;
 			uint8_t Data4[8];
 		} Uuid;
+		struct _byteRepresentation
+		{
+			uint8_t Data1[4];
+			uint8_t Data2[2];
+			uint8_t Data3[2];
+			uint8_t Data4[8];
+		} Bytes;
 
 		bool operator == (const uuid &guid2) const;
 		bool operator != (const uuid &guid2) const;
