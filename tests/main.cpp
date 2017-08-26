@@ -13,13 +13,6 @@
 using namespace uuidxx;
 using namespace std;
 
-template<class T, class... Tail>
-auto make_array(T head, Tail... tail) -> std::array<T, 1 + sizeof...(Tail)>
-{
-     std::array<T, 1 + sizeof...(Tail)> a = { head, tail ... };
-     return a;
-}
-
 bool TestEquality()
 {
 	bool result = true;
@@ -93,7 +86,7 @@ bool InnerTestParsing(string test, string testCase, bool &result)
 bool TestParsing()
 {
 	bool result = true;
-	
+
 	InnerTestParsing("basic", "A04CB1DE-25F7-4BC0-A1CE-1D0246FF362B", result);
 	InnerTestParsing("braces", "{A04CB1DE-25F7-4BC0-A1CE-1D0246FF362B}", result);
 	InnerTestParsing("lower-case", "a04cb1de-25f7-4bc0-a1ce-1d0246ff362b", result);
@@ -168,7 +161,7 @@ bool TestUniqueness()
 
 int main (int argc, char *argv[])
 {
-	auto tests = make_array(TestStringGeneration, TestEquality, TestParsing, TestUniqueness);
+	auto tests = { TestStringGeneration, TestEquality, TestParsing, TestUniqueness };
 
 	int fails = 0;
 	for (auto test : tests)
