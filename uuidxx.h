@@ -69,6 +69,8 @@ namespace uuidxx
 				throw new NotImplemented();
 			case Variant::Version4:
 				return Generatev4();
+			default:
+				throw new NotImplemented();
 			}
 		}
 
