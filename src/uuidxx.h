@@ -1,5 +1,9 @@
 #pragma once
 
+// ObjC compatibility
+#pragma push_macro("Nil")
+#undef Nil
+
 #include <stdexcept>
 #include <cstdint>
 #include <string>
@@ -9,6 +13,7 @@ namespace uuidxx
 	enum class Variant
 	{
 		Nil,
+		Nill, // for ObjC compatibility
 		Version1,
 		Version2,
 		Version3,
@@ -61,6 +66,7 @@ namespace uuidxx
 			switch (v)
 			{
 			case Variant::Nil:
+			case Variant::Nill:
 				return uuid(nullptr); // Special-cased
 			case Variant::Version1:
 			case Variant::Version2:
@@ -79,3 +85,5 @@ namespace uuidxx
 
 	static_assert(sizeof(uuid) == 2 * sizeof(int64_t), "Check uuid type declaration/padding!");
 }
+
+#pragma pop_macro("Nil")
