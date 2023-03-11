@@ -32,4 +32,4 @@ uudxxtest = executable('uuidxxtest', 'tests/main.cpp',
 		include_directories: [ 'src/' ],
 		link_with: uuidxx, install: false)
 
-test('functionality test', uudxxtest)
+test('Functionality test', uudxxtest)
