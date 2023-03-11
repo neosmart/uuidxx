@@ -40,7 +40,7 @@ uuid::uuid (const char *uuidString)
 {
 	if (uuidString == nullptr)
 	{
-		//special case, and prevents random bugs
+		// Special case (and prevents random bugs)
 		memset(this, 0, sizeof(uuid));
 		return;
 	}
@@ -76,7 +76,7 @@ uuid uuid::FromString(const std::string &uuidString)
 
 uuid uuid::Generatev4()
 {
-	//mach-o does not support TLS and clang still has issues with thread_local
+	// Mach-O does not support TLS and clang still has issues with thread_local
 #if !defined(__APPLE__) && !defined(__clang__)
 	thread_local std::random_device rd;
 	thread_local auto gen = std::mt19937_64(rd());
@@ -90,9 +90,9 @@ uuid uuid::Generatev4()
 	newGuid.WideIntegers[0] = dis64(gen);
 	newGuid.WideIntegers[1] = dis64(gen);
 
-	//RFC4122 defines (psuedo)random uuids (in big-endian notation):
-	//MSB of DATA4[0] specifies the variant and should be 0b10 to indicate standard uuid,
-	//and MSB of DATA3 should be 0b0100 to indicate version 4
+	// RFC4122 defines (psuedo)random uuids (in big-endian notation):
+	// MSB of DATA4[0] specifies the variant and should be 0b10 to indicate standard uuid,
+	// and MSB of DATA3 should be 0b0100 to indicate version 4
 	newGuid.Bytes.Data4[0] = (newGuid.Bytes.Data4[0] & 0x3F) | static_cast<uint8_t>(0x80);
 	newGuid.Bytes.Data3[1] = (newGuid.Bytes.Data3[1] & 0x0F) | static_cast<uint8_t>(0x40);
 

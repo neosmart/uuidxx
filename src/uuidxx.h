@@ -61,7 +61,7 @@ namespace uuidxx
 			switch (v)
 			{
 			case Variant::Nil:
-				return uuid(nullptr); //special case;
+				return uuid(nullptr); // Special-cased
 			case Variant::Version1:
 			case Variant::Version2:
 			case Variant::Version3:
