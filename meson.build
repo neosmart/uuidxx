@@ -21,7 +21,7 @@ safe_args = ['-Wall', '-Weffc++', '-pedantic',
 	'-Wunused-function',  '-Wunused-label', '-Wno-unused-parameter',
 	'-Wunused-value',  '-Wunused-variable',  '-Wvariadic-macros',
 	'-Wvolatile-register-var',  '-Wwrite-strings', '-Wfatal-errors',
-	'-Wno-deprecated-declarations']
+	'-Wno-deprecated-declarations', '-Wno-aggregate-return']
 
 add_global_arguments(safe_args, language: ['cpp'])
 
