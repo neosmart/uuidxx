@@ -20,7 +20,7 @@ bool TestEquality()
 
 	uuid test1, test2;
 
-	auto passTest = [&](bool reverse = false) {
+	auto passTest = [&](bool reverse) {
 		if ((test1 != test2) ^ reverse)
 		{
 			cout << "FAIL!" << endl;
@@ -36,7 +36,7 @@ bool TestEquality()
 	cout << "Testing assignment... ";
 	test1 = uuid::Generate();
 	test2 = test1;
-	passTest();
+	passTest(false);
 
 	cout << "Testing move operator... ";
 	test1 = uuid::Generate();
@@ -46,18 +46,18 @@ bool TestEquality()
 	cout << "Testing equality of normal GUIDs... ";
 	test1 = uuid("2C121B80-14B1-4B5A-AD48-9043DC251FDF");
 	test2 = uuid("2C121B80-14B1-4B5A-AD48-9043DC251FDF");
-	passTest();
+	passTest(false);
 
 
 	cout << "Testing equality of lower- vs upper-cased GUIDs... ";
 	test1 = uuid("2C121B80-14B1-4B5A-AD48-9043DC251FDF");
 	test2 = uuid("2c121b80-14b1-4b5a-ad48-9043dc251fdf");
-	passTest();
+	passTest(false);
 
 	cout << "Testing equality of braced vs non-braced GUIDs... ";
 	test1 = uuid("2C121B80-14B1-4B5A-AD48-9043DC251FDF");
 	test2 = uuid("{2C121B80-14B1-4B5A-AD48-9043DC251FDF}");
-	passTest();
+	passTest(false);
 
 	cout << "Testing inequality of random GUIDs... ";
 	test1 = uuid::Generate();
