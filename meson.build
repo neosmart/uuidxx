@@ -25,9 +25,11 @@ safe_args = ['-Wall', '-Weffc++', '-pedantic',
 
 add_global_arguments(safe_args, language: ['cpp'])
 
-uuidxx = shared_library('uuidxx', 'uuidxx.cpp', install: true)
-static_library('uuidxx', 'uuidxx.cpp', install: true)
+uuidxx = shared_library('uuidxx', 'src/uuidxx.cpp', install: true)
+static_library('uuidxx', 'src/uuidxx.cpp', install: true)
 
-uudxxtest = executable('uuidxxtest', 'tests/main.cpp', link_with: uuidxx, install: false)
+uudxxtest = executable('uuidxxtest', 'tests/main.cpp',
+		include_directories: [ 'src/' ],
+		link_with: uuidxx, install: false)
 
 test('functionality test', uudxxtest)

@@ -147,10 +147,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="tests\main.cpp" />
-    <ClCompile Include="uuidxx.cpp" />
+    <ClCompile Include="src\uuidxx.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="uuidxx.h" />
+    <ClInclude Include="src\uuidxx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

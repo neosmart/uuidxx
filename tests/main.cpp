@@ -1,10 +1,11 @@
-#include "../uuidxx.h"
 #include <cassert>
 #include <string>
 #include <iostream>
 #include <set>
 #include <array>
 #include <string.h>
+
+#include <uuidxx.h>
 
 #ifdef _WIN32
 #define strcasecmp _stricmp
