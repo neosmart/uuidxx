@@ -2,6 +2,9 @@
 #define _CRT_SECURE_NO_WARNINGS
 #endif
 
+// ObjC compatibility issue
+#undef Nil
+
 #include "uuidxx.h"
 #include <random>
 #include <stdio.h>
