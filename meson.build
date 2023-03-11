@@ -1,7 +1,7 @@
-project('uuidxx', ['cpp'], default_options: ['cpp_std=c++11'])
+project('uuidxx', ['cpp'], default_options: ['cpp_std=c++11', 'warning_level=3'])
 
-safe_args = ['-Wall', '-Weffc++', '-pedantic',
-	'-pedantic-errors', '-Wextra',  '-Wall', '-Waggregate-return', '-Wcast-align',
+safe_args = ['-Weffc++', '-pedantic',
+	'-Waggregate-return', '-Wcast-align',
 	'-Wcast-qual',  '-Wchar-subscripts',  '-Wcomment', '-Wconversion',
 	'-Wdisabled-optimization',
 	'-Wfloat-equal',  '-Wformat',  '-Wformat=2',
@@ -10,7 +10,7 @@ safe_args = ['-Wall', '-Weffc++', '-pedantic',
 	'-Wimport',  '-Winit-self',  '-Winline',
 	'-Winvalid-pch',
 	'-Wlong-long', '-Wmissing-braces',
-	'-Wno-missing-field-initializers', '-Wmissing-format-attribute',
+	'-Wmissing-format-attribute',
 	'-Wmissing-include-dirs', '-Wmissing-noreturn',
 	'-Wpacked',  '-Wparentheses',  '-Wpointer-arith',
 	'-Wredundant-decls', '-Wreturn-type',
@@ -18,10 +18,10 @@ safe_args = ['-Wall', '-Weffc++', '-pedantic',
 	'-Wstrict-aliasing', '-Wstrict-aliasing=2', '-Wswitch',  '-Wswitch-default',
 	'-Wswitch-enum', '-Wtrigraphs',  '-Wuninitialized',
 	'-Wunknown-pragmas',  '-Wunreachable-code',
-	'-Wunused-function',  '-Wunused-label', '-Wno-unused-parameter',
+	'-Wunused-function',  '-Wunused-label',
 	'-Wunused-value',  '-Wunused-variable',  '-Wvariadic-macros',
 	'-Wvolatile-register-var',  '-Wwrite-strings', '-Wfatal-errors',
-	'-Wno-deprecated-declarations', '-Wno-aggregate-return']
+	'-Wno-aggregate-return']
 
 add_global_arguments(safe_args, language: ['cpp'])
 

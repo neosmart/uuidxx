@@ -160,7 +160,7 @@ bool TestUniqueness()
 	}
 }
 
-int main (int argc, char *argv[])
+int main()
 {
 	auto tests = { TestStringGeneration, TestEquality, TestParsing, TestUniqueness };
 
